@@ -51,6 +51,11 @@ jobs:
         with:
           path: site
 
+      # upload-pages-artifact can return before the artifact is indexed.
+      # A short delay avoids "No artifacts named github-pages" on deploy.
+      - name: Wait for the Pages artifact
+        run: sleep 8
+
       - id: deployment
         uses: actions/deploy-pages@v4
 
